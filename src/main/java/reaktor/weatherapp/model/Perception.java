@@ -1,7 +1,6 @@
 package reaktor.weatherapp.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 public class Perception {
@@ -11,7 +10,7 @@ public class Perception {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PERCEPTION_ID")
-    private Long perceptionId; // Automatically generated answer Id number
+    private Long perceptionId; // Automatically generated perception Id number
 
     @Column(name = "TIMESTAMP")
     private String timestamp;
@@ -20,15 +19,19 @@ public class Perception {
     private String temperature;
 
     @Column(name = "STATION")
-    private String station;
+    private Station station;
 
     // ======== Constructors: ======== //
 
     public Perception() {}
 
-    public Perception(String temperature, String station) {
-        Date date = new Date();
-        this.timestamp = date.toString();
+    public Perception(String timestamp, String temperature) {
+        this.timestamp = timestamp;
+        this.temperature = temperature;
+    }
+
+    public Perception(String timestamp, String temperature, Station station) {
+        this.timestamp = timestamp;
         this.temperature = temperature;
         this.station = station;
     }
@@ -51,11 +54,14 @@ public class Perception {
         this.temperature = temperature;
     }
 
-    public String getStation() {
+    public Station getStation() {
         return station;
     }
 
-    // ======== toString: ======== //
+    public void setStation(Station station) {
+        this.station = station;
+    }
+// ======== toString: ======== //
 
     @Override
     public String toString() {
@@ -63,7 +69,7 @@ public class Perception {
                 "perceptionId=" + perceptionId +
                 ", timestamp='" + timestamp + '\'' +
                 ", temperature='" + temperature + '\'' +
-                ", station='" + station + '\'' +
+                ", station=" + station +
                 '}';
     }
 }
