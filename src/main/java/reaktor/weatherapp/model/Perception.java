@@ -1,6 +1,7 @@
 package reaktor.weatherapp.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Perception {
@@ -13,10 +14,10 @@ public class Perception {
     private Long perceptionId; // Automatically generated perception Id number
 
     @Column(name = "TIMESTAMP")
-    private String timestamp;
+    private Date timestamp;
 
     @Column(name = "TEMPERATURE")
-    private String temperature;
+    private double temperature;
 
     @Column(name = "STATION")
     private Station station;
@@ -25,12 +26,7 @@ public class Perception {
 
     public Perception() {}
 
-    public Perception(String timestamp, String temperature) {
-        this.timestamp = timestamp;
-        this.temperature = temperature;
-    }
-
-    public Perception(String timestamp, String temperature, Station station) {
+    public Perception(Date timestamp, double temperature, Station station) {
         this.timestamp = timestamp;
         this.temperature = temperature;
         this.station = station;
@@ -42,15 +38,15 @@ public class Perception {
         return perceptionId;
     }
 
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public String getTemperature() {
+    public double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(String temperature) {
+    public void setTemperature(double temperature) {
         this.temperature = temperature;
     }
 
@@ -61,15 +57,16 @@ public class Perception {
     public void setStation(Station station) {
         this.station = station;
     }
-// ======== toString: ======== //
+
+    // ======== toString: ======== //
 
     @Override
     public String toString() {
-        return "Perception{" +
-                "perceptionId=" + perceptionId +
-                ", timestamp='" + timestamp + '\'' +
-                ", temperature='" + temperature + '\'' +
-                ", station=" + station +
+        return "{" +
+                "\"perceptionId\" : \"" + perceptionId + "\"," +
+                "\"timestamp\" : \"" + timestamp + "\"," +
+                "\"temperature\" : \"" + temperature + "\"," +
+                "\"station\" : \"" + station + "\"" +
                 '}';
     }
 }
