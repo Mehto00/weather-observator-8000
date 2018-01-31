@@ -5,11 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.DateUtils;
 import reaktor.weatherapp.dao.PerceptionDAO;
 import reaktor.weatherapp.model.Perception;
 import reaktor.weatherapp.model.Station;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @CrossOrigin(maxAge = 3600)
 @Controller
@@ -49,6 +52,28 @@ public class PerceptionController {
         response = response + perceptionByStation.toString();
         return response;
     }
+
+    @RequestMapping(value = "/test/{stationName}", method = RequestMethod.GET)
+    @ResponseBody
+    public String displayLatestTemp(@PathVariable String stationName) {
+        String response = "";
+        Iterable<Perception> perceptionByStation = perceptionDAO.findLatestTempByStation(Station.valueOf(stationName));
+        response = response + perceptionByStation.toString();
+        return response;
+    }
+
+    @RequestMapping(value = "/min/{stationName}", method = RequestMethod.GET)
+    @ResponseBody
+    public String displayMinAndMaxByStation(@PathVariable String stationName) {
+        Date yesterday = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L);
+        String response = "";
+        Iterable<Perception> stationMin = perceptionDAO.findMinTempByStation(Station.valueOf(stationName), yesterday);
+        Iterable<Perception> stationMax = perceptionDAO.findMaxTempByStation(Station.valueOf(stationName), yesterday);
+        response = response + "min : " + stationMin.toString() + " / max : " + stationMax.toString();
+        return response;
+    }
+
+
 
 
 }
