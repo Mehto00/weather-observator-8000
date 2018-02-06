@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Reaktor</title>
+	<link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:700|Open+Sans" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	<header>
+		<h1>REAKTOR SUMMER ASSIGNMENT 8000</h1>
+		<nav class="mainNav">
+			<ul>
+				<li>Main</li>
+				<li>About</li>
+				<li>Contact</li>
+			</ul>
+		</nav>
+	</header>
+	<section class="submit">
+		<form id="postPerceptions" action="207.154.212.16:8080/weather-app/perceptions" method="POST">
+			<select name="station">
+				<option value="amsterdam">Amsterdam</option>
+				<option value="dubai">Dubai</option>
+				<option value="helsinki">Helsinki</option>
+				<option value="new_york">New York</option>
+				<option value="tokyo">Tokyo</option>
+			</select>
+			<input type="number" name="temperature">
+			<br>
+			<button type="submit">submit</button>
+		</form>
+	</section>
+	<main>
+		<section class="stations" id="amsterdam">
+			<h2>Amsterdam</h2>
+			<p>Latest:</p>
+			<p><span id="amsterdam-latest">14.4</span><br>
+			(31.1.2018)</p>
+			<p>Max: 24.4 / Min: -14.4</p>
+		</section>
+		<section class="stations" id="dubai">
+			<h2>Dubai</h2>
+			<p>Latest:</p>
+			<p><span id="dubai-latest">14.4</span><br>
+			(31.1.2018)</p>
+			<p>Max: 24.4 / Min: -14.4</p>
+		</section>
+		<section class="stations" id="helsinki">
+			<h2>Helsinki</h2>
+			<p>Latest:</p>
+			<p><span id="helsinki-latest">14.4</span><br>
+			(31.1.2018)</p>
+			<p>Max: 24.4 / Min: -14.4</p>
+		</section>
+		<section class="stations" id="new_york">
+			<h2>New York</h2>
+			<p>Latest:</p>
+			<p><span id="new_york-latest">14.4</span><br>
+			(31.1.2018)</p>
+			<p>Max: 24.4 / Min: -14.4</p>
+		</section>
+		<section class="stations" id="tokyo">
+			<h2>Tokyo</h2>
+			<p>Latest:</p>
+			<p><span id="tokyo-latest">14.4</span><br>
+			(31.1.2018)</p>
+			<p>Max: 24.4 / Min: -14.4</p>
+		</section>
+		<section class="stations" id="about">
+			<h2>About</h2>
+			<p>Latest:</p>
+			<p>14.4<br>
+			(31.1.2018)</p>
+			<p>Max: 24.4 / Min: -14.4</p>
+		</section>
+	</main>
+
+	<footer></footer>
+
+<script
+  src="http://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
+	<script src="js/main.js"> </script>
+</body>
+</html>

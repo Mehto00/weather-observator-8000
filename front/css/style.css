@@ -1,0 +1,106 @@
+html {
+	background: url("../img/koreanmarket.png") no-repeat fixed center;
+}
+
+body {
+	margin: 0 auto;
+	width: 100%;
+}
+
+header {
+	background: #161E2B;
+	padding: 15px;
+	text-align: center;
+}
+
+.mainNav {
+	display:none;
+}
+
+ul li {
+	color: #fff;
+	display: inline-block;
+	margin: 20px 10px 0 0;
+}
+
+main {
+	display: flex;
+	flex: 1;
+	flex-wrap: wrap;
+}
+
+h1, h2, p {
+	color: #fff;
+	font-family: 'Mukta Mahee', sans-serif; 
+}
+
+select, button {
+	background: none;
+	color: #fff;
+	padding: 5px 15px;
+	border: solid #fff 1px;
+}
+
+.stations {
+	width: 100%;
+	height: 25vh;
+	margin: auto;
+	text-align: center;
+}
+
+.submit {
+	background: rgba(115,155,195,0.7);
+	text-align: center;
+	padding: 3% 0 ;
+}
+
+.stations:nth-child(odd) {
+	background: rgba(0,0,0,0.6);
+}
+
+.stations:nth-child(even) {
+	background: rgba(94,94,94,0.6);
+}
+
+footer {
+}
+
+/* ===== Media Queries ===== */
+
+@media screen and (min-width: 800px) {
+
+	header {
+		display: flex;
+		flex: 1;
+		justify-content: space-between;
+	}
+	
+	/* Stations width grown for displaying station sections in a row */
+	.stations {
+		width: 50%;
+	}
+
+	/* Checkers background color black */
+	.stations:nth-child(1),
+	.stations:nth-child(4),
+	.stations:nth-child(5) {
+		background: rgba(0,0,0,0.6);
+	}
+
+	/* Checkers background color grey */
+	.stations:nth-child(2),
+	.stations:nth-child(3),
+	.stations:nth-child(6) {
+		background: rgba(94,94,94,0.6);
+	}
+
+	.mainNav {
+		display:block;
+	}
+}
+
+@media screen and (min-width: 550px) {
+	body {
+		width: 75%;
+	}
+}
