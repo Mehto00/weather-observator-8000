@@ -18,71 +18,103 @@
 			</ul>
 		</nav>
 	</header>
+
 	<section class="submit">
-		<form id="postPerceptions" action="207.154.212.16:8080/weather-app/perceptions" method="POST">
-			<select name="station">
+		<form id="postPerceptions">
+			<select id="station" name="station">
+				<option default>Select Station</option>
 				<option value="amsterdam">Amsterdam</option>
 				<option value="dubai">Dubai</option>
 				<option value="helsinki">Helsinki</option>
 				<option value="new_york">New York</option>
 				<option value="tokyo">Tokyo</option>
 			</select>
-			<input type="number" name="temperature">
+			<input type="number" id="temperature" name="temperature" placeholder="Submit temperature">
 			<br>
 			<button type="submit">submit</button>
 		</form>
 	</section>
+
 	<main>
+	
 		<section class="stations" id="amsterdam">
 			<h2>Amsterdam</h2>
 			<p>Latest:</p>
-			<p><span id="amsterdam-latest">14.4</span><br>
-			(31.1.2018)</p>
-			<p>Max: 24.4 / Min: -14.4</p>
+			<p>
+				<span id="amsterdam-latest">-</span><br>
+				(<span id="amsterdam-date">No Date</span>)
+			</p>
+			<p>
+				Max: <span id="amsterdam-max">–</span>
+			 	/ Min: <span id="amsterdam-min">–</span>
+			</p>
 		</section>
+
 		<section class="stations" id="dubai">
 			<h2>Dubai</h2>
 			<p>Latest:</p>
-			<p><span id="dubai-latest">14.4</span><br>
-			(31.1.2018)</p>
-			<p>Max: 24.4 / Min: -14.4</p>
+			<p>
+				<span id="dubai-latest">-</span><br>
+				(<span id="dubai-date">No Date</span>)
+			</p>
+			<p>
+				Max: <span id="dubai-max">–</span>
+			 	/ Min: <span id="dubai-min">–</span>
+			</p>
 		</section>
+
 		<section class="stations" id="helsinki">
 			<h2>Helsinki</h2>
 			<p>Latest:</p>
-			<p><span id="helsinki-latest">14.4</span><br>
-			(31.1.2018)</p>
-			<p>Max: 24.4 / Min: -14.4</p>
+			<p>
+				<span id="helsinki-latest">-</span><br>
+				(<span id="helsinki-date">No Date</span>)
+			</p>
+			<p>
+				Max: <span id="helsinki-max">–</span>
+			 	/ Min: <span id="helsinki-min">–</span>
+			</p>
 		</section>
+
 		<section class="stations" id="new_york">
 			<h2>New York</h2>
 			<p>Latest:</p>
-			<p><span id="new_york-latest">14.4</span><br>
-			(31.1.2018)</p>
-			<p>Max: 24.4 / Min: -14.4</p>
+			<p>
+				<span id="new_york-latest">-</span><br>
+				(<span id="new_york-date">No Date</span>)
+			</p>
+			<p>
+				Max: <span id="new_york-max">–</span>
+			 	/ Min: <span id="new_york-min">–</span>
+			</p>
 		</section>
+
 		<section class="stations" id="tokyo">
 			<h2>Tokyo</h2>
 			<p>Latest:</p>
-			<p><span id="tokyo-latest">14.4</span><br>
-			(31.1.2018)</p>
-			<p>Max: 24.4 / Min: -14.4</p>
+			<p>
+				<span id="tokyo-latest">-</span><br>
+				(<span id="tokyo-date">No Date</span>)
+			</p>
+			<p>
+				Max: <span id="tokyo-max">–</span>
+			 	/ Min: <span id="tokyo-min">–</span>
+			</p>
 		</section>
+
 		<section class="stations" id="about">
 			<h2>About</h2>
-			<p>Latest:</p>
-			<p>14.4<br>
-			(31.1.2018)</p>
-			<p>Max: 24.4 / Min: -14.4</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate.
+			</p>
 		</section>
 	</main>
 
 	<footer></footer>
 
 <script
-  src="http://code.jquery.com/jquery-1.12.4.min.js"
-  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-  crossorigin="anonymous"></script>
 	<script src="js/main.js"> </script>
 </body>
 </html>
