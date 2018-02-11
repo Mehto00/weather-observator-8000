@@ -9,29 +9,39 @@
 </head>
 <body>
 	<header>
-		<h1>REAKTOR SUMMER ASSIGNMENT 8000</h1>
+		<h1>WEATHER OBSERVATOR 8000</h1>
+		<div class="popups">
+			<div id="ObservationsBox" class=""></div>
+			<div id="about" class=""></div>
+		</div>
 		<nav class="mainNav">
 			<ul>
-				<li>Main</li>
-				<li>About</li>
-				<li>Contact</li>
+				<li><a href="#">About</a></li>
+				<li><a href="#" id="listObservations">All observations</a></li>
+				<li><a href="#">Contact</a></li>
 			</ul>
-		</nav>
+		</nav>		
 	</header>
-
 	<section class="submit">
-		<form id="postPerceptions">
-			<select id="station" name="station">
-				<option default>Select Station</option>
-				<option value="amsterdam">Amsterdam</option>
-				<option value="dubai">Dubai</option>
-				<option value="helsinki">Helsinki</option>
-				<option value="new_york">New York</option>
-				<option value="tokyo">Tokyo</option>
-			</select>
-			<input type="number" id="temperature" name="temperature" placeholder="Submit temperature">
-			<br>
-			<button type="submit">submit</button>
+		<form id="postObservations">
+			<ul id="form-flex">
+				<li>
+					<select id="station" name="station">
+						<option default>Select Station</option>
+						<option value="amsterdam">Amsterdam</option>
+						<option value="dubai">Dubai</option>
+						<option value="helsinki">Helsinki</option>
+						<option value="new_york">New York</option>
+						<option value="tokyo">Tokyo</option>
+					</select>
+				</li>
+				<li>
+					<input type="tel	" id="temperature" name="temperature" placeholder="Submit temperature">
+				</li>
+				<li>
+					<button type="submit">submit</button>
+				</li>
+			</ul>	
 		</form>
 	</section>
 
@@ -39,66 +49,71 @@
 	
 		<section class="stations" id="amsterdam">
 			<h2>Amsterdam</h2>
-			<p>Latest:</p>
-			<p>
-				<span id="amsterdam-latest">-</span><br>
+			<p>Latest temp:
+				<span id="amsterdam-latest">-</span> (&#8451;)<br>
 				(<span id="amsterdam-date">No Date</span>)
 			</p>
 			<p>
-				Max: <span id="amsterdam-max">–</span>
-			 	/ Min: <span id="amsterdam-min">–</span>
+				Max / Min:<br>
+				<span id="amsterdam-max-min">No values available due to
+				<br>the lack of observations in the past 24 hours
+				</span>
 			</p>
 		</section>
 
 		<section class="stations" id="dubai">
 			<h2>Dubai</h2>
-			<p>Latest:</p>
-			<p>
-				<span id="dubai-latest">-</span><br>
+			<p>Latest temp:
+				<span id="dubai-latest">-</span> (&#8451;)<br>
 				(<span id="dubai-date">No Date</span>)
 			</p>
 			<p>
-				Max: <span id="dubai-max">–</span>
-			 	/ Min: <span id="dubai-min">–</span>
+				Max / Min:<br>
+				<span id="dubai-max-min">No values available due to
+				<br>the lack of observations in the past 24 hours
+				</span>
 			</p>
 		</section>
 
 		<section class="stations" id="helsinki">
 			<h2>Helsinki</h2>
-			<p>Latest:</p>
-			<p>
-				<span id="helsinki-latest">-</span><br>
+			<p>Latest temp:
+				<span id="helsinki-latest">-</span> (&#8451;)<br>
 				(<span id="helsinki-date">No Date</span>)
 			</p>
 			<p>
-				Max: <span id="helsinki-max">–</span>
-			 	/ Min: <span id="helsinki-min">–</span>
+				Max / Min:<br>
+				<span id="helsinki-max-min">No values available due to
+				<br>the lack of observations in the past 24 hours
+				</span>
 			</p>
 		</section>
 
 		<section class="stations" id="new_york">
 			<h2>New York</h2>
-			<p>Latest:</p>
-			<p>
-				<span id="new_york-latest">-</span><br>
+			<p>Latest temp:
+				<span id="new_york-latest">-</span> (&#8451;)<br>
 				(<span id="new_york-date">No Date</span>)
 			</p>
 			<p>
-				Max: <span id="new_york-max">–</span>
-			 	/ Min: <span id="new_york-min">–</span>
+				Max / Min:<br>
+				<span id="new_york-max-min">No values available due to
+				<br>the lack of observations in the past 24 hours
+				</span>
 			</p>
 		</section>
 
 		<section class="stations" id="tokyo">
 			<h2>Tokyo</h2>
-			<p>Latest:</p>
-			<p>
-				<span id="tokyo-latest">-</span><br>
+			<p>Latest temp:
+				<span id="tokyo-latest">-</span> (&#8451;)<br>
 				(<span id="tokyo-date">No Date</span>)
 			</p>
 			<p>
-				Max: <span id="tokyo-max">–</span>
-			 	/ Min: <span id="tokyo-min">–</span>
+				Max / Min:<br>
+				<span id="tokyo-max-min">No values available due to
+				<br>the lack of weather observations in the past 24 hours
+				</span>
 			</p>
 		</section>
 
