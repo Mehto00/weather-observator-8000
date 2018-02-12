@@ -3,27 +3,35 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Reaktor</title>
-	<link href="https://fonts.googleapis.com/css?family=Mukta+Mahee:700|Open+Sans" rel="stylesheet">
+	<title>INTERNSHIP 2018</title>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+
 	<header>
 		<h1>WEATHER OBSERVATOR 8000</h1>
 		<div class="popups">
-			<div id="ObservationsBox" class=""></div>
-			<div id="about" class=""></div>
+			<div id="observationsBox" class=""></div>
+			<div id="contactBox" class=""></div>
 		</div>
 		<nav class="mainNav">
 			<ul>
-				<li><a href="#">About</a></li>
-				<li><a href="#" id="listObservations">All observations</a></li>
-				<li><a href="#">Contact</a></li>
+				<li><a href="#" class="openObservationsList">All Observations</a></li>
+				<li><a href="#" id="openContact">Contact</a></li>
 			</ul>
 		</nav>		
 	</header>
-	<section class="submit">
-		<form id="postObservations">
+
+	<section id="about">
+		<h2>Here's THE WEATHER OBSERVATOR 8000</h2>
+		<p>You can submit your weather observations via form below. They are saved to a database and submission automatically updates the view with latest observation. From 
+		<a href="#" class="openObservationsList">all observations</a> you get to a pop-up list of all the observations submitted.</p>
+	</section>
+
+	<main>
+		<section class="stations" id="submit">
+			<form id="postObservations">
 			<ul id="form-flex">
 				<li>
 					<select id="station" name="station">
@@ -36,16 +44,14 @@
 					</select>
 				</li>
 				<li>
-					<input type="tel	" id="temperature" name="temperature" placeholder="Submit temperature">
+					<input type="tel" id="temperature" name="temperature" placeholder="Submit temperature">
 				</li>
 				<li>
 					<button type="submit">submit</button>
 				</li>
 			</ul>	
 		</form>
-	</section>
-
-	<main>
+		</section>
 	
 		<section class="stations" id="amsterdam">
 			<h2>Amsterdam</h2>
@@ -55,8 +61,7 @@
 			</p>
 			<p>
 				Max / Min:<br>
-				<span id="amsterdam-max-min">No values available due to
-				<br>the lack of observations in the past 24 hours
+				<span id="amsterdam-max-min">No observations in the past 24 hours
 				</span>
 			</p>
 		</section>
@@ -69,8 +74,7 @@
 			</p>
 			<p>
 				Max / Min:<br>
-				<span id="dubai-max-min">No values available due to
-				<br>the lack of observations in the past 24 hours
+				<span id="dubai-max-min">No observations in the past 24 hours
 				</span>
 			</p>
 		</section>
@@ -83,8 +87,7 @@
 			</p>
 			<p>
 				Max / Min:<br>
-				<span id="helsinki-max-min">No values available due to
-				<br>the lack of observations in the past 24 hours
+				<span id="helsinki-max-min">No observations in the past 24 hours
 				</span>
 			</p>
 		</section>
@@ -97,8 +100,7 @@
 			</p>
 			<p>
 				Max / Min:<br>
-				<span id="new_york-max-min">No values available due to
-				<br>the lack of observations in the past 24 hours
+				<span id="new_york-max-min">No observations in the past 24 hours
 				</span>
 			</p>
 		</section>
@@ -111,18 +113,8 @@
 			</p>
 			<p>
 				Max / Min:<br>
-				<span id="tokyo-max-min">No values available due to
-				<br>the lack of weather observations in the past 24 hours
+				<span id="tokyo-max-min">No observations in the past 24 hours
 				</span>
-			</p>
-		</section>
-
-		<section class="stations" id="about">
-			<h2>About</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-			consequat. Duis aute irure dolor in reprehenderit in voluptate.
 			</p>
 		</section>
 	</main>
