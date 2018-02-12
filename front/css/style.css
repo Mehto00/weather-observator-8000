@@ -1,15 +1,52 @@
+/* ==== GLOBAL SETTINGS ====*/
 html {
-	background: url("../img/koreanmarket.png") no-repeat fixed center;
+	background: #17253d; /* Dark blue */
+	/* background: url("../img/koreanmarket.jpg") no-repeat fixed center;*/
 }
 
+h1, ul {
+	margin: 0;
+	padding: 0;
+}
+/* ==== END OF GLOBAL SETTINGS ====*/
+
+/* ==== TYPOGRAPHY ====*/
+body {
+	color: #fff; /* white */
+	font-family: 'Open Sans', sans-serif;
+	font-size: 100%;
+	font-size: 16px; 
+	line-height: 1.5;
+}
+h1 {
+	font-size: 2em;
+	line-height: 1.25;
+}
+
+h2 {
+	font-size: 1.6em;
+	line-height: 1.2;
+}
+
+h3 {
+	font-size: 1.4em;
+	line-height: 1.15;
+}
+section {
+	font-size: 1em;
+}
+/* ==== END OF TYPOGRAPHY ==== */
+
+
+/* ==== LAYOUT ====*/
 body {
 	margin: 0 auto;
 	width: 100%;
 }
 
 header {
-	background: #161E2B; /* dark blue */
-	padding: 5px 25px;
+	background: #214870; /* navy blue */
+	padding: 35px;
 	text-align: center;
 	display: flex;
 	-webkit-flex-direction: column;
@@ -19,8 +56,58 @@ header {
 	flex-direction: column;
 }
 
-ul li {
+#about {
+	background: rgba(115,155,195,0.7); /* light greyish blue, semi-transparent */
+	text-align: center;
+	padding: 3%;
+}
+
+main {
+	display: flex;
+	flex: 1;
+	flex-wrap: wrap;
+}
+
+#form-flex{
+	display: flex;
+	justify-content: center;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+	padding: 0;
+}
+
+.stations {
+	width: 100%;
+	height: 20%;
+	margin: auto;
+	text-align: center;
+}
+
+.stations:nth-child(odd) {
+	background: #949aa4;
+	/* background: rgba(0,0,0,0.7); /* black, semi-transparent */
+}
+
+.stations:nth-child(even) {
+	background: #535c6d;
+	/* background: rgba(94,94,94,0.8); /* grey, semi-transparent */
+}
+/* ==== END OF LAYOUT ====*/
+
+/* ==== GENERAL STYLES ==== */
+select,
+button {
+	background: none;
+	height: 25px;
 	color: #fff; /* white */
+	padding: 5px 15px;
+	border: solid #fff 1px;
+}
+
+ul li {
 	display: inline-block;
 	margin: 5px 10px 0 0;
 }
@@ -33,106 +120,72 @@ a:hover {
 	color: rgba(94,94,94,1)
 }
 
-main {
-	display: flex;
-	flex: 1;
-	flex-wrap: wrap;
+input {
+	background: #fff;
+	padding: 5px 15px;
+	border: solid #fff 1px
+}
+/* ==== END OF GENERAL STYLES ==== */
+
+/* ==== GENERAL CLASSES ==== */
+.mainNav  {
+	margin-top: 20px;
 }
 
-h1, h2, p {
-	color: #fff; /* white */
-	font-family: 'Mukta Mahee', sans-serif; 
+.light-grey-bg {
+	background: #CCCCCC; /* light grey */
+}
+/* ==== END OF GENERAL CLASSES ==== */
+
+/* ==== POPUPS OPENED FROM .mainNav === */
+.showPopups {
+	background: #fff; /* white */
+	color: black;
+	position: absolute;
+	margin: 1% auto;
+	left: 0;
+	right: 0;
+	width: 90%;
+	height: 90%;
+	overflow: scroll;
+	padding: 10px;
+	z-index: 100;
 }
 
-#form-flex{
+.showPopups a {
+	color: black;
+}
+
+.closePopup {
+	display: block;
+	color: black;
+	position: absolute;
+	right: 15px;
+	top: -5px;
+	cursor: pointer;
+	font-size: 1.2em;
+}
+
+.observationList{
 	display: flex;
-	justify-content: center;
 	-webkit-flex-direction: column;
 	-moz-flex-direction: column;
 	-ms-flex-direction: column;
 	-o-flex-direction: column;
 	flex-direction: column;
 }
-
-select, button {
-	background: none;
-	height: 25px;
-	color: #fff; /* white */
-	padding: 5px 15px;
-	border: solid #fff 1px;
+.content-box {
+	columns: 3 auto;
 }
 
-#temperature {
-	background: #fff;
-	padding: 5px 15px;
-	border: solid #fff 1px
+.content-box p {
+	margin: 0;
+	padding: 4px;
 }
-
-.stations {
-	width: 100%;
-	margin: auto;
-	text-align: center;
-}
-
-.stations {
-	height: 20%;
-}
-
-.submit {
-	background: rgba(115,155,195,0.7); /* light greyish blue, semi-transparent */
-	text-align: center;
-	padding: 3% 0 ;
-}
-
-.stations:nth-child(odd) {
-	background: rgba(0,0,0,0.7); /* black, semi-transparent */
-}
-
-.stations:nth-child(even) {
-	background: rgba(94,94,94,0.8); /* grey, semi-transparent */
-}
-
-/* == Box for listing all the observations == */
-.showPopups {
-	background: rgba(255,255,255,0.95);
-	position: absolute;
-	margin-left: auto;
-	margin-right: auto;
-	left: 0;
-	right: 0;
-	width: 80%;
-	height: 90%;
-	overflow: scroll;
-	padding: 10px;
-	z-index: 100;
-	border-radius: 25px;
-}
-
-.blackFont {
-	color: black;
-}
-
-.close {
-	color: black;
-	position: absolute;
-	right: 15px;
-	top: -5px;
-	cursor: pointer;
-}
-
+/* ==== END OF POPUPS OPENED FROM .mainNav ==== */
 
 /* ===== Media Queries ===== */
-
 @media screen and (min-width: 1100px) {
-	/* Reveal hidden main navigation in larger screens */
-	header {
-		-webkit-flex-direction: row;
-		-moz-flex-direction: row;
-		-ms-flex-direction: row;
-		-o-flex-direction: row;
-		flex-direction: row;
-	}
-
 	#form-flex{
 		-webkit-flex-direction: row;
 		-moz-flex-direction: row;
@@ -140,45 +193,78 @@ select, button {
 		-o-flex-direction: row;
 		flex-direction: row;
 	}
-
 	ul li {
-		color: #fff; /* white */
-		display: inline-block;
 		margin: 20px 10px 0 0;
 	}
 }
 
-@media screen and (min-width: 800px) {
+	/* ==== Responsive Layout ==== */
+	@media screen and (min-width: 1100px) {
+		/* Pushes main navigation to the right side of the header in larger screens */
+		header {
+			display: flex;
+			flex: 1;
+			justify-content: space-between;
+			-webkit-flex-direction: row;
+			-moz-flex-direction: row;
+			-ms-flex-direction: row;
+			-o-flex-direction: row;
+			flex-direction: row;
+		}
+		.mainNav  {
+			margin-top: -5px; 	
+		}
+	}
+	@media screen and (min-width: 800px) {
+		/* Stations width grown for displaying station sections in a row */
+		.stations {
+			width: 50%;
+			height: 25vh;
+		}
+		/* Checkers background color black */
+		.stations:nth-child(1),
+		.stations:nth-child(4),
+		.stations:nth-child(5) {
+			background: #535c6d;
+			/* background: rgba(0,0,0,0.7); */
+		}
+		/* Checkers background color grey */
+		.stations:nth-child(2),
+		.stations:nth-child(3),
+		.stations:nth-child(6) {
+			background: #949aa4;
+			/* background: rgba(94,94,94,0.8); */
+		}
+		.showPopups {
+			width: 55%;
+		}
+	}
+	@media screen and (min-width: 550px) {
+		body {
+			width: 75%;
+		}
+	}
+	/* ==== End of Responsive Layout ==== */
 
-	header {
-		display: flex;
-		flex: 1;
-		justify-content: space-between;
+	/* ==== Responsive Typography ==== */
+	@media screen and (min-width: 1100px) {
+		section {
+			font-size: 1.4;
+			line-height: ;
+		}
 	}
-	
-	/* Stations width grown for displaying station sections in a row */
-	.stations {
-		width: 50%;
-		height: 25vh;
+	@media screen and (min-width: 800px) {
+		section {
+			font-size: 1.2em;
+			line-height: ;
+		}
 	}
+	@media screen and (min-width: 550px) {
+		section {
+			font-size: 1.1em;
+			line-height: ;
+		}
+	}
+	/* ==== End of Responsive Typography ==== */
 
-	/* Checkers background color black */
-	.stations:nth-child(1),
-	.stations:nth-child(4),
-	.stations:nth-child(5) {
-		background: rgba(0,0,0,0.7);
-	}
-
-	/* Checkers background color grey */
-	.stations:nth-child(2),
-	.stations:nth-child(3),
-	.stations:nth-child(6) {
-		background: rgba(94,94,94,0.8);
-	}
-}
-
-@media screen and (min-width: 550px) {
-	body {
-		width: 75%;
-	}
-}
+/* ===== End of Media Queries ===== */
