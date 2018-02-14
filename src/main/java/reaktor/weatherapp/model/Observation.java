@@ -1,17 +1,18 @@
 package reaktor.weatherapp.model;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-public class Perception {
+public class Observation {
 
     // ======== Properties: ======== //
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "PERCEPTION_ID")
-    private Long perceptionId; // Automatically generated perception Id number
+    @Column(name = "OBSERVATION_ID")
+    private Long observationId; // Automatically generated observation Id number
 
     @Column(name = "TIMESTAMP")
     private Date timestamp;
@@ -22,20 +23,29 @@ public class Perception {
     @Column(name = "STATION")
     private Station station;
 
+    private String formatedDate;
+
     // ======== Constructors: ======== //
 
-    public Perception() {}
+    public Observation() {}
 
-    public Perception(Date timestamp, double temperature, Station station) {
+    public Observation(Date timestamp, double temperature, Station station) {
         this.timestamp = timestamp;
         this.temperature = temperature;
         this.station = station;
     }
 
+    public Observation(Date timestamp, double temperature, Station station, String formatedDate) {
+        this.timestamp = timestamp;
+        this.temperature = temperature;
+        this.station = station;
+        this.formatedDate = formatedDate;
+    }
+
     // ======== Getters / Setters: ======== //
 
     public Long getPerceptionId() {
-        return perceptionId;
+        return observationId;
     }
 
     public Date getTimestamp() {
@@ -58,13 +68,19 @@ public class Perception {
         this.station = station;
     }
 
+    public void setFormatedDate(Date timestamp) {
+        String pattern = "dd/MM/yyyy HH:mm";
+        SimpleDateFormat df = new SimpleDateFormat(pattern);
+        this.formatedDate = df.format(timestamp);
+    }
+
     // ======== toString: ======== //
 
     @Override
     public String toString() {
         return "{" +
-                "\"perceptionId\" : \"" + perceptionId + "\"," +
-                "\"timestamp\" : \"" + timestamp + "\"," +
+                "\"observationId\" : \"" + observationId + "\"," +
+                "\"timestamp\" : \"" + formatedDate + "\"," +
                 "\"temperature\" : \"" + temperature + "\"," +
                 "\"station\" : \"" + station + "\"" +
                 '}';

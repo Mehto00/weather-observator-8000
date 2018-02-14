@@ -3,11 +3,11 @@ package reaktor.weatherapp.repo;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import reaktor.weatherapp.model.Perception;
+import reaktor.weatherapp.model.Observation;
 
 @Repository
-public interface PerceptionRepository extends CrudRepository<Perception, Long>{
+public interface PerceptionRepository extends CrudRepository<Observation, Long>{
 
-    <S extends Perception> S save(S s);
+    <S extends Observation> S save(S s);
 
 }
