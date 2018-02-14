@@ -24,7 +24,7 @@
 	</header>
 
 	<section id="about">
-		<h2>Here's THE WEATHER OBSERVATOR 8000</h2>
+		<h2>Here's WEATHER OBSERVATOR 8000</h2>
 		<p>You can submit your weather observations via form to some pre-given stations. Observations are saved to a database and submission automatically updates the view with latest observation. From 
 		<a href="#" class="openObservationsList">all observations</a> you get to a pop-up list of all the observations submitted.</p>
 	</section>
@@ -36,6 +36,7 @@
 			<a href="#" id="openForm"><button class="btn">Open form</button></a>
 			<div class="formBox">
 				<p class="closePopupCross">&#10006;</p><br>
+				<div id="submitInfo" class=""><p id="submitText">Something went wrong when filling the form</p></div>
 				<div class="formContainer">
 					<div class="formWrapper">
 						<form id="postObservation">
@@ -57,7 +58,7 @@
 							<fieldset>
 								<legend>Enter a temperature</legend>
 								<label>temperature</label>
-								<input type="number" id="temperature" name="temperature" min="-140" max="140"><br>
+								<input type="number" id="temperature" name="temperature" step="0.01" min="-140.00" max="140.00"><br>
 							</fieldset>
 							<fieldset class="noBorder">
 								<input type="submit" class="btn" name="submit" value="submit">
@@ -72,7 +73,7 @@
 			<h2>Amsterdam</h2>
 			<p>Latest temp:
 				<span id="amsterdam-latest">-</span> (&#8451;)<br>
-				(<span id="amsterdam-date">No Date</span>)
+				<span id="amsterdam-date">No Date</span>
 			</p>
 			<p>
 				Max / Min: (past 24h)<br>
@@ -85,7 +86,7 @@
 			<h2>Dubai</h2>
 			<p>Latest temp:
 				<span id="dubai-latest">-</span> (&#8451;)<br>
-				(<span id="dubai-date">No Date</span>)
+				<span id="dubai-date">No Date</span>
 			</p>
 			<p>
 				Max / Min: (past 24h)<br>
@@ -98,7 +99,7 @@
 			<h2>Helsinki</h2>
 			<p>Latest temp:
 				<span id="helsinki-latest">-</span> (&#8451;)<br>
-				(<span id="helsinki-date">No Date</span>)
+				<span id="helsinki-date">No Date</span>
 			</p>
 			<p>
 				Max / Min: (past 24h)<br>
@@ -111,7 +112,7 @@
 			<h2>New York</h2>
 			<p>Latest temp:
 				<span id="new_york-latest">-</span> (&#8451;)<br>
-				(<span id="new_york-date">No Date</span>)
+				<span id="new_york-date">No Date</span>
 			</p>
 			<p>
 				Max / Min: (past 24h)<br>
@@ -124,7 +125,7 @@
 			<h2>Tokyo</h2>
 			<p>Latest temp:
 				<span id="tokyo-latest">-</span> (&#8451;)<br>
-				(<span id="tokyo-date">No Date</span>)
+				<span id="tokyo-date">No Date</span>
 			</p>
 			<p>
 				Max / Min: (past 24h)<br>

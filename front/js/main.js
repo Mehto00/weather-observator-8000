@@ -26,15 +26,15 @@ function getApiData() {
    	.then((data) => {
 				// Appends fetched data to correct span by property 
 	            document.querySelector(`#${temp}-latest`).innerHTML = data[0].temperature;
-	            document.querySelector(`#${temp}-date`).innerHTML = data[0].timestamp;
+	            document.querySelector(`#${temp}-date`).innerHTML = "submitted " + data[0].timestamp;
 	            // Checks if api data exist (hence the apostrophes) and after that appends it to correct span
 	            if (data[1].max !== "null") {
-	            	document.querySelector(`#${temp}-max-min`).innerHTML = "Max: " + data[1].max + " Min: " + data[1].min;
+	            	document.querySelector(`#${temp}-max-min`).innerHTML = "Max: " + data[1].max + " / Min: " + data[1].min;
 	            }           
 	        });
    }
    console.log('Api data updated')
-};
+}; // function getApiData()
 
 
 /* ========== Event Listeners  ========== */
@@ -46,6 +46,7 @@ form.addEventListener("submit", function (e) {
 	e.preventDefault();
 
 	let fd = new FormData(form);
+	const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 	//Check if user submitted fahrenheit and convert to celsius
 	if (fd.get("tempScale") == "fahrenheit") {
@@ -54,19 +55,52 @@ form.addEventListener("submit", function (e) {
 	}
 
 	fetch(postObservation, {
-	method: 'POST', // or 'PUT'
-	//mode: 'no-cors',
-	body: fd, 
-	headers: new Headers({
-	'Content-Type': 'application/json',
-	'Access-Control-Allow-Origin': 'http://localhost:80',
-	'Access-Control-Allow-Headers': '*'
+	  method: 'post',
+	  body: fd, // post body 
+	  headers: {
+	    'Accept': 'multipart/form-data'
+	  },
+	  credentials: 'same-origin', // send cookies
+	  credentials: 'include',     // send cookies, even in CORS
+	})	
+	.then(res => {
+		if (!res.ok) { throw res }			
+		console.log(res.status, "Hooray! Your observation was successfully submitted");	
+		document.querySelector("#submitInfo").classList.remove("submitError");
+		document.querySelector("#submitInfo").classList.toggle("submitSuccess");
+		document.querySelector("#submitText").innerHTML = "Observation successfully submitted";
+
 	})
-	}).catch(error => console.error('HODOR!!:', error))
-	.then(() => getApiData());
-	
-	document.querySelector(".formBox").classList.remove("formBoxShown");
-})
+	.then(() => getApiData())
+	.then(() => wait(3000))
+	.then(() => clearClassesAndClose())
+	.catch(res => {
+			if (res.status >= 400 && res.status < 500) {
+				console.error(res.status, "Upsy-Daisy! Something went wrong when filling the form");
+				document.querySelector("#submitText").innerHTML = "Something went wrong when filling the form";
+			} else if (res.status >= 500 && res.status < 600) {
+				console.error(res.status, "Upsy-Daisy! Something's wrong on the Server side");
+				document.querySelector("#submitText").innerHTML = "Something's wrong on the Server side";
+			}
+			document.querySelector("#submitInfo").classList.toggle("submitError");
+		}
+	);
+
+	document.querySelectorAll("input").forEach(function (item) {
+		if (item.checked) {
+			item.checked = false;
+		} else if (item.type == "number") {
+			item.value = "";	
+		}
+	}); // document.querySelectorAll("input")
+
+	function clearClassesAndClose() {
+		document.querySelector("#submitInfo").classList.remove("submitSuccess");
+		document.querySelector("#submitInfo").classList.remove("submitError");
+		document.querySelector(".formBox").classList.remove("formBoxShown");
+		console.log("boom!");
+	} // clearClassesAndClose()
+}) // form.addEventListener("submit"..)
 
 /* Event Listener for catching clicks on "All observations" -links and printing
 out the data from api to a pop up window with the help of toggling css class showPopups */
@@ -92,7 +126,7 @@ Array.from(openObservationsList).forEach(function(element) {
 		    document.querySelector("#observationsBox").innerHTML = printString;
 		});
 	});
-});
+}); // Array.from(openObservationsList).forEach..)
 
 /* Event Listener for catching clicks on "Contact" -link and popping up the Contact info */
 document.querySelector("#openContact").addEventListener("click", function (e) {
@@ -104,7 +138,7 @@ document.querySelector("#openContact").addEventListener("click", function (e) {
 	"<ul><li><a href=\"http://www.linkedin.com/in/mikkometso/\" target=\"_blank\">You can find my Linkedin profile from here</a>.</li><br>" +
 	"<li><a href=\"https://github.com/Mehto00/reaktor-weather-app\" target=\"_blank\">And the Github repository about this project here</a>.</li></ul>"
 	document.querySelector("#contactBox").innerHTML = printString;
-});
+}); // document.querySelector("#openContact")
 
 /* For hiding the previously mentioned "All observations" and  popup -windows with a click targeting the .closePopupCross -mark */
 document.querySelector(".popups").addEventListener("click", function (e) {
@@ -122,20 +156,8 @@ document.querySelector("#openForm").addEventListener("click", function (e) {
 });
 /* Event Listener for hiding the submit form */
 document.querySelector(".closePopupCross").addEventListener("click", function (e) {
+	document.querySelector("#submitText").innerHTML = ""
+	document.querySelector("#submitInfo").classList.remove("submitError");
 	document.querySelector(".formBox").classList.remove("formBoxShown");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
