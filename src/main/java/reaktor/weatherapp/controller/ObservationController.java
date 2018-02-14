@@ -9,9 +9,11 @@ import reaktor.weatherapp.dao.ObservationDAO;
 import reaktor.weatherapp.model.Observation;
 import reaktor.weatherapp.model.Station;
 
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@CrossOrigin(origins = "http://localhost:80", maxAge = 3600)
+@CrossOrigin(origins = "http://207.154.212.16")
 @Controller
 public class ObservationController {
 
@@ -59,6 +61,12 @@ public class ObservationController {
     @ResponseBody
     public String displayMinAndMaxByStation(@PathVariable String stationName) {
         Date yesterday = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L);
+
+        //TODO: figure out the way how to format date here also
+        //Pattern and SimpleDateFormat for formating
+        String pattern = "dd/MM/yyyy HH:mm";
+        SimpleDateFormat df = new SimpleDateFormat(pattern);
+
 
         // This section is for printing out the latest submitted observation for the given station
         String observationId;
