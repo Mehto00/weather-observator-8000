@@ -34,11 +34,12 @@ function getApiData() {
 	        });
    }
    console.log('Api data updated')
-}; // function getApiData()
+}; // END OF function getApiData()
 
 
 /* ========== Event Listeners  ========== */
 
+// Get data from API
 document.addEventListener("load", getApiData())
 
 /* Event Listener for submitting data to API with http POST */
@@ -54,6 +55,12 @@ form.addEventListener("submit", function (e) {
 		fd.set("temperature", ((fheit - 32) * 5/9).toFixed(1));
 	}
 
+	// Check if all the form fields has value before submitting
+	if (!fd.get("station") || !fd.get("tempScale") || !fd.get("temperature")) {
+		// Dislpay error message and add red box as styling
+		document.querySelector("#submitInfo").classList.add("submitError");
+		document.querySelector("#submitText").innerHTML = "All fields are mandatory";
+	} else {
 	fetch(postObservation, {
 	  method: 'post',
 	  body: fd, // post body 
@@ -66,9 +73,9 @@ form.addEventListener("submit", function (e) {
 	.then(res => {
 		if (!res.ok) { throw res }			
 		console.log(res.status, "Hooray! Your observation was successfully submitted");	
-		document.querySelector("#submitInfo").classList.remove("submitError");
-		document.querySelector("#submitInfo").classList.toggle("submitSuccess");
-		document.querySelector("#submitText").innerHTML = "Observation successfully submitted";
+		document.querySelector("#submitInfo").classList.remove("submitError"); // Removes red box if user has continued after unsuccessful form submit
+		document.querySelector("#submitInfo").classList.toggle("submitSuccess"); // Adds greenbox 
+		document.querySelector("#submitText").innerHTML = "Observation successfully submitted"; // and feedback about succesful submit
 
 	})
 	.then(() => getApiData())
@@ -85,22 +92,24 @@ form.addEventListener("submit", function (e) {
 			document.querySelector("#submitInfo").classList.toggle("submitError");
 		}
 	);
+	} // END OF else {fetch(postObservation, ..}
 
+	// For clearing the form values after the submit
 	document.querySelectorAll("input").forEach(function (item) {
 		if (item.checked) {
 			item.checked = false;
 		} else if (item.type == "number") {
 			item.value = "";	
 		}
-	}); // document.querySelectorAll("input")
+	});
 
 	function clearClassesAndClose() {
-		document.querySelector("#submitInfo").classList.remove("submitSuccess");
-		document.querySelector("#submitInfo").classList.remove("submitError");
-		document.querySelector("#submitText").innerHTML = ""
-		document.querySelector(".formBox").classList.remove("formBoxShown");
-	} // clearClassesAndClose()
-}) // form.addEventListener("submit"..)
+		document.querySelector("#submitInfo").classList.remove("submitSuccess"); // For resetting styling
+		document.querySelector("#submitInfo").classList.remove("submitError"); // For resetting styling
+		document.querySelector("#submitText").innerHTML = "" // For resetting #submitText
+		document.querySelector(".formBox").classList.remove("formBoxShown"); // And lastly hides the formBox
+	}
+}) // END OF form.addEventListener("submit"..)
 
 /* Event Listener for catching clicks on "All observations" -links and printing
 out the data from api to a pop up window with the help of toggling css class showPopups */
@@ -110,15 +119,15 @@ Array.from(openObservationsList).forEach(function(element) {
 		
 		fetch(allObservations)
 		.then((res) => { return res.json() })
-		.then((data) => {
-			
+		.then((data) => {			
 			let printString = "<div><p class=\"closePopupCross\">&#10006;</p></div>" + 
 			"<h3 class=\"content-box-header\">All Observations</h3>" + 
-			"<div class=\"observationList\">"		
+			"<div class=\"observationList\">"
+			data.reverse(); // Display the latest submit first
 			for (var i = 0; i < data.length; i++) {
 				printString = printString + 
 				"<div class=\"content-box\">" + 
-				"<p>Station: " + data[i].station + "</p>" +
+				"<p>Station: " + toTitleCase(data[i].station) + "</p>" +
 				"<p>Temperature: " + data[i].temperature + "</p>" +
 				"<p>Time: " + data[i].timestamp + "</p></div>";     
 		    } 
@@ -126,7 +135,17 @@ Array.from(openObservationsList).forEach(function(element) {
 		    document.querySelector("#observationsBox").innerHTML = printString;
 		});
 	});
-}); // Array.from(openObservationsList).forEach..)
+
+	// toTitleCase for formatting listed station names
+	var toTitleCase = function (str) {
+		str = str.toLowerCase().split(' ');
+		for (var i = 0; i < str.length; i++) {
+			str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+		}
+		return str.join(' ');
+	};
+
+}); // END OF Array.from(openObservationsList).forEach..)
 
 /* Event Listener for catching clicks on "Contact" -link and popping up the Contact info */
 document.querySelector("#openContact").addEventListener("click", function (e) {
@@ -142,7 +161,7 @@ document.querySelector("#openContact").addEventListener("click", function (e) {
 	"<ul><li><a href=\"http://www.linkedin.com/in/mikkometso/\" target=\"_blank\">You can find my Linkedin profile from here</a>.</li><br>" +
 	"<li><a href=\"https://github.com/Mehto00/weather-observator-8000\" target=\"_blank\">And the Github repository about this project here</a>.</li></ul>"
 	document.querySelector("#contactBox").innerHTML = printString;
-}); // document.querySelector("#openContact")
+}); // END OF document.querySelector("#openContact")
 
 /* For hiding the previously mentioned "All observations" and  popup -windows with a click targeting the .closePopupCross -mark */
 document.querySelector(".popups").addEventListener("click", function (e) {
@@ -158,6 +177,7 @@ document.querySelector(".popups").addEventListener("click", function (e) {
 document.querySelector("#openForm").addEventListener("click", function (e) {
 	document.querySelector(".formBox").classList.toggle("formBoxShown");
 });
+
 /* Event Listener for hiding the submit form */
 document.querySelector(".closePopupCross").addEventListener("click", function (e) {
 	document.querySelector("#submitText").innerHTML = ""
