@@ -13,7 +13,7 @@ import reaktor.weatherapp.model.Station;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@CrossOrigin(origins = "http://207.154.212.16")
+@CrossOrigin(origins = "http:// - ENABLE-CORS-FROM-URL - ")
 @Controller
 public class ObservationController {
 
@@ -76,15 +76,14 @@ public class ObservationController {
 
         Iterable<Observation> observationIdByStation = observationDAO.findLatestObservationIdByStation(Station.valueOf(stationName));
         Iterable<Observation> observationTempByStation = observationDAO.findLatestTempByStation(Station.valueOf(stationName));
-        Iterable<Observation> observationTimestampByStation = observationDAO.findLatestTimestampByStation(Station.valueOf(stationName));
+        Date observationTimestampByStation = observationDAO.findLatestTimestampByStation(Station.valueOf(stationName));
 
         //Formatting out some unnecessary brackets from sql query
         observationId = observationIdByStation.toString();
         observationId = observationId.substring(1, observationId.length() -1);
         observationTemp = observationTempByStation.toString();
         observationTemp = observationTemp.substring(1, observationTemp.length() -1);
-        observationTimestamp = observationTimestampByStation.toString();
-        observationTimestamp = observationTimestamp.substring(1, observationTimestamp.length() -1);
+        observationTimestamp = df.format(observationTimestampByStation).toString();
 
         response = response + "[{\"observationId\" : \"" + observationId + "\",\"temperature\" : \"" + observationTemp + "\",\"timestamp\" : \"" + observationTimestamp + "\"},";
 

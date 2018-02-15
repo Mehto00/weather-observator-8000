@@ -25,7 +25,7 @@ public interface ObservationDAO extends CrudRepository<Observation,Long>{
     public List<Observation> findLatestObservationIdByStation(@Param("station") Station station);
 
     @Query(value = "SELECT timestamp FROM Observation p WHERE p.observationId = (SELECT MAX(observationId) FROM Observation p WHERE p.station = :station)")
-    public List<Observation> findLatestTimestampByStation(@Param("station") Station station);
+    public Date findLatestTimestampByStation(@Param("station") Station station);
 
 
     // Queries for printing out the min/max temperatures for the last 24 hours by given station name
