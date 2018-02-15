@@ -50,7 +50,7 @@ form.addEventListener("submit", function (e) {
 	const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 	//Check if user submitted fahrenheit and convert to celsius
-	if (fd.get("tempScale") == "fahrenheit") {
+	if (fd.get("tempScale") == "fahrenheit" && fd.get("temperature")) {
 		let fheit = fd.get("temperature");
 		fd.set("temperature", ((fheit - 32) * 5/9).toFixed(1));
 	}
