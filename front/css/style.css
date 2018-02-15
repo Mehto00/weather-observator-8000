@@ -73,7 +73,6 @@ main {
 
 .stations {
 	width: 100%;
-	height: 20%;
 	margin: auto;
 	text-align: center;
 }
@@ -105,7 +104,7 @@ ul li {
 }
 
 a {
-	color: #fff;
+	color: #fff; /* white */
 }
 
 a:hover {
@@ -113,9 +112,9 @@ a:hover {
 }
 
 input {
-	background: #fff;
+	background: #fff; /* white */
 	padding: 5px 15px;
-	border: solid #fff 1px
+	border: solid #fff 1px /* white */
 }
 /* ==== END OF GENERAL STYLES ==== */
 
@@ -134,7 +133,7 @@ input {
 .btn {
 	border-radius: 20px;
 	background: rgba(255,255,255,0.5); /* light greyish blue, semi-transparent */
-	color: #fff; /* Dark blue */
+	color: #fff; /* white */
 	font-size: 1em;
 	line-height: 0em;
 	width: 40%;
@@ -142,13 +141,13 @@ input {
 	padding: 15px 0px;
 }
 .btn:hover {
-	background: #fff;
-	color: #17253d; /* Dark blue */
+	background: #fff; /* white */
+	color: #17253d; /* dark blue */
 }
 
 .btn:focus{
 	outline: none;
-	border: 3px solid #fff ;
+	border: 3px solid #fff ; /* white */
 }
 
 .stations p {
@@ -215,14 +214,14 @@ input {
 	display: block;
 	background: rgb(115,155,195);
 	box-shadow: 0px 0px 2px 0px #1C1C1C; /* dark grey */
-	color: #fff;
+	color: #fff; /* white */
 	position: absolute;
-	margin: 5% auto;
+	margin: 0 auto;
 	top: 0;
 	left: 0;
 	right: 0;
-	width: 90%;
-	height: 80%;
+	width: 100%;
+	height: 640px;
 	font-size: 1.1em;
 }
 
@@ -235,7 +234,7 @@ input {
 }
 
 fieldset {
-	border: solid #fff 1px;
+	border: solid #fff 1px; /* white */
 	margin-bottom: 25px;
 	padding: 2px 10px 5px 10px;
 }
@@ -245,12 +244,12 @@ fieldset {
 	color: #fff; /* white */
 	padding: 2px 2px 2px 8px;
 	margin-left: 5px;
-	border: 1px solid #fff ;
+	border: 1px solid #fff ; /* white */
 }
 
 #temperature:focus{
 	outline: none;
-	border: 3px solid #fff ;
+	border: 3px solid #fff ; /* white */
 }
 
 .submitSuccess {
@@ -271,16 +270,12 @@ fieldset {
 	display: block;
 	margin: 0 auto;
 	padding-top: 20px;
+	font-size: 0.8em;
 }
 
 /* ==== END OF OBSERVATION FORM ====*/
 
 /* ===== Media Queries ===== */
-@media screen and (min-width: 1100px) {
-	ul li {
-		margin: 20px 10px 0 0;
-	}
-}
 
 	/* ==== Responsive Layout ==== */
 	@media screen and (min-width : 1100px) {
@@ -295,6 +290,9 @@ fieldset {
 			-o-flex-direction: row;
 			flex-direction: row;
 		}
+		ul li {
+			margin: 20px 10px 0 0;
+		}
 		.mainNav  {
 			margin-top: -5px; 	
 		}
@@ -305,7 +303,7 @@ fieldset {
 			width: 80%;
 		}
 	}
-	@media screen and (min-width : 900px) {
+	@media screen and (min-width : 1025px) {
 		/* Stations width grown for displaying station sections in a row */
 		.stations {
 			width: 50%;
@@ -315,15 +313,13 @@ fieldset {
 		.stations:nth-child(1),
 		.stations:nth-child(4),
 		.stations:nth-child(5) {
-			background: #535c6d;
-			/* background: rgba(0,0,0,0.7); */
+			background: #535c6d; /* greyish blue */
 		}
 		/* Checkers background color grey */
 		.stations:nth-child(2),
 		.stations:nth-child(3),
 		.stations:nth-child(6) {
-			background: #949aa4;
-			/* background: rgba(94,94,94,0.8); */
+			background: #949aa4; /* light grey */
 		}
 		.showPopups {
 			width: 55%;
@@ -336,13 +332,27 @@ fieldset {
 		body {
 			width: 75%;
 		}
+		.formBoxShown{
+			margin: 5% auto;
+			width: 80%;
+			height: 95%;
+		}
+		#submitText {
+			font-size: 0.9em;
+		}
 	}
 
 	/* Dealing with landscape layouts  */
-	@media screen and (max-device-width: 900px)
+	@media screen and (max-device-width: 1025px)
 				  and (orientation: landscape) {
 		.formBoxShown {
 			height: 120%;
+		}
+	}
+
+	@media screen and (max-height: 900px) {
+		.stations {
+			height: 250px;
 		}
 	}
 	/* ==== End of Responsive Layout ==== */
@@ -354,7 +364,7 @@ fieldset {
 			line-height: ;
 		}
 	}
-	@media screen and (min-width : 900px) {
+	@media screen and (min-width : 1025px) {
 		section {
 			font-size: 1.2em;
 			line-height: ;

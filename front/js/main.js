@@ -26,7 +26,7 @@ function getApiData() {
    	.then((data) => {
 				// Appends fetched data to correct span by property 
 	            document.querySelector(`#${temp}-latest`).innerHTML = data[0].temperature;
-	            document.querySelector(`#${temp}-date`).innerHTML = "submitted " + data[0].timestamp;
+	            document.querySelector(`#${temp}-date`).innerHTML = "Submitted " + data[0].timestamp;
 	            // Checks if api data exist (hence the apostrophes) and after that appends it to correct span
 	            if (data[1].max !== "null") {
 	            	document.querySelector(`#${temp}-max-min`).innerHTML = "Max: " + data[1].max + " / Min: " + data[1].min;
@@ -72,12 +72,12 @@ form.addEventListener("submit", function (e) {
 
 	})
 	.then(() => getApiData())
-	.then(() => wait(3000))
+	.then(() => wait(2000))
 	.then(() => clearClassesAndClose())
 	.catch(res => {
 			if (res.status >= 400 && res.status < 500) {
 				console.error(res.status, "Upsy-Daisy! Something went wrong when filling the form");
-				document.querySelector("#submitText").innerHTML = "Something went wrong when filling the form";
+				document.querySelector("#submitText").innerHTML = "All fields are mandatory";
 			} else if (res.status >= 500 && res.status < 600) {
 				console.error(res.status, "Upsy-Daisy! Something's wrong on the Server side");
 				document.querySelector("#submitText").innerHTML = "Something's wrong on the Server side";
@@ -97,8 +97,8 @@ form.addEventListener("submit", function (e) {
 	function clearClassesAndClose() {
 		document.querySelector("#submitInfo").classList.remove("submitSuccess");
 		document.querySelector("#submitInfo").classList.remove("submitError");
+		document.querySelector("#submitText").innerHTML = ""
 		document.querySelector(".formBox").classList.remove("formBoxShown");
-		console.log("boom!");
 	} // clearClassesAndClose()
 }) // form.addEventListener("submit"..)
 
@@ -131,12 +131,16 @@ Array.from(openObservationsList).forEach(function(element) {
 /* Event Listener for catching clicks on "Contact" -link and popping up the Contact info */
 document.querySelector("#openContact").addEventListener("click", function (e) {
 	document.querySelector(".popups").classList.toggle("showPopups");
-	let printString = "<div><p class=\"closePopupCross\">&#10006;</p></div>" +
+	let printString = "<div>" + 
+	"<p class=\"closePopupCross\">&#10006;</p></div>" +
 	"<img src=\"img/meika.png\" />" +
 	"<h3 class=\"content-box-header\">Here's the deal</h3>" + 
-	"<p>I am a nearly graduated Haaga-Helia student looking for a internship.<br>I'm also Graphic designer and a lifelong learner on a path to become a Full Stack developer.<br>I’m living in Helsinki, learning every day to be better at things like coding and cooking.<br>And generally in life of course.</p>" +
+	"<p>I am a nearly graduated Haaga-Helia student looking for an internship.<br>" + 
+	"I'm also a graphic designer and a lifelong learner on a path to become a full stack developer.<br>" + 
+	"I’m living in Helsinki, learning every day to be better at things like coding and cooking.<br>" + 
+	"And generally in life, of course.</p>" +
 	"<ul><li><a href=\"http://www.linkedin.com/in/mikkometso/\" target=\"_blank\">You can find my Linkedin profile from here</a>.</li><br>" +
-	"<li><a href=\"https://github.com/Mehto00/reaktor-weather-app\" target=\"_blank\">And the Github repository about this project here</a>.</li></ul>"
+	"<li><a href=\"https://github.com/Mehto00/weather-observator-8000\" target=\"_blank\">And the Github repository about this project here</a>.</li></ul>"
 	document.querySelector("#contactBox").innerHTML = printString;
 }); // document.querySelector("#openContact")
 
