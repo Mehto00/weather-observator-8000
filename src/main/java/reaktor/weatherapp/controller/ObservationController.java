@@ -57,21 +57,21 @@ public class ObservationController {
     // Lists the all latest observations by station
     @RequestMapping(value = "/latest", method = RequestMethod.GET)
     @ResponseBody
-    public ArrayList<ArrayList> displayAllMinAndMaxFromStations() {
+    public String displayAllMinAndMaxFromStations() {
 
-        ArrayList<ArrayList> displayAllMinAndMaxFromStations = new ArrayList<>();
+        String response = "";
 
-        // Loops through Station enum and adds data to displayAllMinAndMaxFromStations List
+        // Loops through Station enum and adds data to response String
         for (Station station : Station.values()) {
-            ArrayList<String> displayMinAndMaxByStation = new ArrayList<>();
 
+            // Creates a reference for querying observations from the last 24 hours
             Date yesterday = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L);
 
             //Pattern and SimpleDateFormat for formating
             String pattern = "dd/MM/yyyy HH:mm";
             SimpleDateFormat df = new SimpleDateFormat(pattern);
 
-            // Fetch all necessary data from db with value Station.valueOf(stationName)
+            // Fetch latest submitted observation from db and max and min values of the referenced station from the last 24 huors
             Iterable<Observation> observationIdByStation = observationDAO.findLatestObservationIdByStation(station);
             Iterable<Observation> observationTempByStation = observationDAO.findLatestTempByStation(station);
             Date observationTimestampByStation = observationDAO.findLatestTimestampByStation(station);
@@ -79,47 +79,46 @@ public class ObservationController {
             Iterable<Observation> stationMax = observationDAO.findMaxTempByStation(station, yesterday);
 
             // Format fetched data into a String and cut out unnecessary brackets from the beginning and end
-            // FetchData.toString().substring(1, FetchData.toString().length() -1);
-            String stationNameToCollection = station.toString();
             String observationId = observationIdByStation.toString().substring(1, observationIdByStation.toString().length() -1);
             String observationTemp = observationTempByStation.toString().substring(1, observationTempByStation.toString().length() -1);
-
-            String observationTimestamp;
-            try {
-                observationTimestamp = df.format(observationTimestampByStation).substring(1, df.format(observationTimestampByStation).length() -1);
-            } catch (Exception e) {observationTimestamp = "";}
-
             String observationMin = stationMin.toString().substring(1, stationMin.toString().length() -1);
             String observationMax = stationMax.toString().substring(1, stationMax.toString().length() -1);
 
-            // Create a list of Strings to print out and add the previous values to it
-            ArrayList<String> latestByStation = new ArrayList<String>();
+            // Check if there's a observationTimestampByStation that can be formatted
+            String observationTimestamp;
+            try {
+                observationTimestamp = df.format(observationTimestampByStation);
+            } catch (Exception e) {observationTimestamp = "";}
 
-            displayMinAndMaxByStation.add(stationNameToCollection);
-            displayMinAndMaxByStation.add(observationId);
-            displayMinAndMaxByStation.add(observationTemp);
-            displayMinAndMaxByStation.add(observationTimestamp);
-            displayMinAndMaxByStation.add(observationMin);
-            displayMinAndMaxByStation.add(observationMax);
+            Observation observation = new Observation(observationTimestamp, Double.parseDouble(observationTemp), station, observationMin, observationMax);
+            // setTheObservationId to point to the right observation
+            observation.setObservationId(Long.parseLong(observationId));
+            // format Date to correct "dd/MM/yyyy HH:mm" form
+            observation.setFormatedDate(observationTimestampByStation);
 
-            displayAllMinAndMaxFromStations.add(displayMinAndMaxByStation);
+            response = response + observation.printAll() + ",";
         }
+            response = "[ " + response.substring(0 , response.toString().length() -1) + "]";
 
-        return displayAllMinAndMaxFromStations;
+        return response;
+
     }
 
     // Lists the latest from one station by URL as JSON
     @RequestMapping(value = "/latest/{stationName}", method = RequestMethod.GET)
     @ResponseBody
-    public ArrayList<ArrayList> displayMinAndMaxByStation(@PathVariable String stationName) {
-        ArrayList<ArrayList> displayMinAndMaxByStation = new ArrayList<>();
+    public String displayMinAndMaxByStation(@PathVariable String stationName) {
+
+        String response = "";
+
+        // Creates a reference for querying observations from the last 24 hours
         Date yesterday = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L);
 
         //Pattern and SimpleDateFormat for formating
         String pattern = "dd/MM/yyyy HH:mm";
         SimpleDateFormat df = new SimpleDateFormat(pattern);
 
-        // Fetch all necessary data from db with value Station.valueOf(stationName)
+        // Fetch latest submitted observation from db and max and min values of the referenced station from the last 24 huors
         Iterable<Observation> observationIdByStation = observationDAO.findLatestObservationIdByStation(Station.valueOf(stationName));
         Iterable<Observation> observationTempByStation = observationDAO.findLatestTempByStation(Station.valueOf(stationName));
         Date observationTimestampByStation = observationDAO.findLatestTimestampByStation(Station.valueOf(stationName));
@@ -127,32 +126,28 @@ public class ObservationController {
         Iterable<Observation> stationMax = observationDAO.findMaxTempByStation(Station.valueOf(stationName), yesterday);
 
         // Format fetched data into a String and cut out unnecessary brackets from the beginning and end
-        // FetchData.toString().substring(1, FetchData.toString().length() -1);
-        String stationNameToCollection = Station.valueOf(stationName).toString();
         String observationId = observationIdByStation.toString().substring(1, observationIdByStation.toString().length() -1);
         String observationTemp = observationTempByStation.toString().substring(1, observationTempByStation.toString().length() -1);
-
-        String observationTimestamp;
-        try {
-            observationTimestamp = df.format(observationTimestampByStation).substring(1, df.format(observationTimestampByStation).length() -1);
-        } catch (Exception e) {observationTimestamp = "";}
-
         String observationMin = stationMin.toString().substring(1, stationMin.toString().length() -1);
         String observationMax = stationMax.toString().substring(1, stationMax.toString().length() -1);
 
-        // Create a list of Strings to print out and add the previous values to it
-        ArrayList<String> latestByStation = new ArrayList<String>();
+        // Check if there's a observationTimestampByStation that can be formatted
+        String observationTimestamp;
+        try {
+            observationTimestamp = df.format(observationTimestampByStation);
+        } catch (Exception e) {observationTimestamp = "";}
 
-        latestByStation.add(stationNameToCollection);
-        latestByStation.add(observationId);
-        latestByStation.add(observationTemp);
-        latestByStation.add(observationTimestamp);
-        latestByStation.add(observationMin);
-        latestByStation.add(observationMax);
+        Observation observation = new Observation(observationTimestamp, Double.parseDouble(observationTemp), Station.valueOf(stationName), observationMin, observationMax);
+        // setTheObservationId to point to the right Observation
+        observation.setObservationId(Long.parseLong(observationId));
+        // format Date to correct "dd/MM/yyyy HH:mm" form
+        observation.setFormatedDate(observationTimestampByStation);
 
-        displayMinAndMaxByStation.add(latestByStation);
+        response = response + observation.printAll() + ",";
 
-        return displayMinAndMaxByStation;
+        response = "[ " + response.substring(0 , response.toString().length() -1) + "]";
+
+        return response;
     }
 
 }

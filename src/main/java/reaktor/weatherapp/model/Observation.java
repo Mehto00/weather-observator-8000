@@ -25,6 +25,10 @@ public class Observation {
 
     private String formatedDate;
 
+    private String max;
+
+    private String min;
+
     // ======== Constructors: ======== //
 
     public Observation() {}
@@ -42,10 +46,22 @@ public class Observation {
         this.formatedDate = formatedDate;
     }
 
+    public Observation(String formatedDate, double temperature, Station station, String max, String min) {
+        this.timestamp = timestamp;
+        this.temperature = temperature;
+        this.station = station;
+        this.max = max;
+        this.min = min;
+    }
+
     // ======== Getters / Setters: ======== //
 
-    public Long getPerceptionId() {
+    public Long getObservationId() {
         return observationId;
+    }
+
+    public void setObservationId(Long observationId) {
+        this.observationId = observationId;
     }
 
     public Date getTimestamp() {
@@ -68,6 +84,14 @@ public class Observation {
         this.station = station;
     }
 
+    public String getMax() {
+        return max;
+    }
+
+    public String getMin() {
+        return min;
+    }
+
     public void setFormatedDate(Date timestamp) {
         String pattern = "dd/MM/yyyy HH:mm";
         SimpleDateFormat df = new SimpleDateFormat(pattern);
@@ -83,6 +107,17 @@ public class Observation {
                 "\"timestamp\" : \"" + formatedDate + "\"," +
                 "\"temperature\" : \"" + temperature + "\"," +
                 "\"station\" : \"" + station + "\"" +
+                '}';
+    }
+
+    public String printAll() {
+        return "{" +
+                "\"observationId\" : \"" + observationId + "\"," +
+                "\"timestamp\" : \"" + formatedDate + "\"," +
+                "\"temperature\" : \"" + temperature + "\"," +
+                "\"station\" : \"" + station + "\"," +
+                "\"max\" : \"" + max + "\"," +
+                "\"min\" : \"" + min + "\"" +
                 '}';
     }
 }
