@@ -2,6 +2,11 @@
 
 Demo project to score me the mother of all summer jobs. Back end made with **Spring Framework**. Front end displays some basic **html / css / javascript** code. 
 
+## TODO's
+
+Next Up:
+* Creating a React Front End for the project. (due end of February)
+
 ## Demo
 
 You can check out the finnished project from here:
