@@ -1,17 +1,18 @@
 # WEATHER OBSERVATOR 8000
 
-Demo project to score me the mother of all summer jobs. Back end made with **Spring Framework**. Front end displays some basic **html / css / javascript** code. 
+Demo project to score me the mother of all summer jobs. 
 
-## TODO's
+- Back end made with **Spring Framework** 
 
-Next Up:
-* Creating a React Front End for the project. (due end of February)
+- Front end made with **React** You can find out more about the frond end from here:
+
+https://github.com/Mehto00/wo8000-react-front-end
 
 ## Demo
 
 You can check out the finnished project from here:
 
-http://code.mikkometso.com/internship2018/
+http://207.154.212.16:5000/
 
 # Brief
 
