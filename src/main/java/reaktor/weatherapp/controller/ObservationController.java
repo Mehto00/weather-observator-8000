@@ -8,7 +8,6 @@ import reaktor.weatherapp.model.Observation;
 import reaktor.weatherapp.model.Station;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 @CrossOrigin(origins = "http:// - ENABLE-CORS-FROM-URL - ")
@@ -75,8 +74,8 @@ public class ObservationController {
             Iterable<Observation> observationIdByStation = observationDAO.findLatestObservationIdByStation(station);
             Iterable<Observation> observationTempByStation = observationDAO.findLatestTempByStation(station);
             Date observationTimestampByStation = observationDAO.findLatestTimestampByStation(station);
-            Iterable<Observation> stationMin = observationDAO.findMinTempByStation(station, yesterday);
             Iterable<Observation> stationMax = observationDAO.findMaxTempByStation(station, yesterday);
+            Iterable<Observation> stationMin = observationDAO.findMinTempByStation(station, yesterday);
 
             // Format fetched data into a String and cut out unnecessary brackets from the beginning and end
             String observationId = observationIdByStation.toString().substring(1, observationIdByStation.toString().length() -1);
@@ -90,7 +89,7 @@ public class ObservationController {
                 observationTimestamp = df.format(observationTimestampByStation);
             } catch (Exception e) {observationTimestamp = "";}
 
-            Observation observation = new Observation(observationTimestamp, Double.parseDouble(observationTemp), station, observationMin, observationMax);
+            Observation observation = new Observation(observationTimestamp, Double.parseDouble(observationTemp), station, observationMax, observationMin);
             // setTheObservationId to point to the right observation
             observation.setObservationId(Long.parseLong(observationId));
             // format Date to correct "dd/MM/yyyy HH:mm" form
@@ -122,8 +121,8 @@ public class ObservationController {
         Iterable<Observation> observationIdByStation = observationDAO.findLatestObservationIdByStation(Station.valueOf(stationName));
         Iterable<Observation> observationTempByStation = observationDAO.findLatestTempByStation(Station.valueOf(stationName));
         Date observationTimestampByStation = observationDAO.findLatestTimestampByStation(Station.valueOf(stationName));
-        Iterable<Observation> stationMin = observationDAO.findMinTempByStation(Station.valueOf(stationName), yesterday);
         Iterable<Observation> stationMax = observationDAO.findMaxTempByStation(Station.valueOf(stationName), yesterday);
+        Iterable<Observation> stationMin = observationDAO.findMinTempByStation(Station.valueOf(stationName), yesterday);
 
         // Format fetched data into a String and cut out unnecessary brackets from the beginning and end
         String observationId = observationIdByStation.toString().substring(1, observationIdByStation.toString().length() -1);
@@ -137,7 +136,7 @@ public class ObservationController {
             observationTimestamp = df.format(observationTimestampByStation);
         } catch (Exception e) {observationTimestamp = "";}
 
-        Observation observation = new Observation(observationTimestamp, Double.parseDouble(observationTemp), Station.valueOf(stationName), observationMin, observationMax);
+        Observation observation = new Observation(observationTimestamp, Double.parseDouble(observationTemp), Station.valueOf(stationName), observationMax, observationMin);
         // setTheObservationId to point to the right Observation
         observation.setObservationId(Long.parseLong(observationId));
         // format Date to correct "dd/MM/yyyy HH:mm" form
